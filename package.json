@@ -20,7 +20,11 @@
     "react-helmet": "^6.1.0"
   },
   "devDependencies": {
-    "prettier": "^2.7.1"
+    "autoprefixer": "^10.4.7",
+    "gatsby-plugin-postcss": "^5.19.0",
+    "postcss": "^8.4.14",
+    "prettier": "^2.7.1",
+    "tailwindcss": "^3.1.6"
   },
   "keywords": [
     "gatsby"
@@ -28,7 +32,7 @@
   "license": "0BSD",
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop",
+    "dev": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
     "start": "gatsby develop",
     "serve": "gatsby serve",
