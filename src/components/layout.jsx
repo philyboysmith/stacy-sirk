@@ -24,12 +24,7 @@ const Layout = ({ children }) => {
     <>
       <div className="mx-auto max-w-5xl px-8 lg:px-16 font-univers py-4">
         <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `var(--space-5)`,
-            fontSize: `var(--font-sm)`,
-          }}
-        >
+        <footer className="py-4">
           © {new Date().getFullYear()} &middot; Stacy Sirk
         </footer>
       </div>
