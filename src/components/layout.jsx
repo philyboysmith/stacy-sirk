@@ -22,9 +22,7 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <div
-        className="mx-auto max-w-5xl px-16"
-      >
+      <div className="mx-auto max-w-5xl px-8 lg:px-16 font-univers py-4">
         <main>{children}</main>
         <footer
           style={{

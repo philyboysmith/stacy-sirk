@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@svgr/cli": "^6.3.0",
     "gatsby": "^4.19.0",
     "gatsby-plugin-gatsby-cloud": "^4.19.0",
     "gatsby-plugin-image": "^2.19.0",

@@ -1,3 +1,17 @@
+@font-face {
+  font-family: "Univers";
+  src: url("./fonts/UniversLightCondensed.ttf");
+}
+
+@font-face {
+  font-family: "Ultrathins";
+  src: url("./fonts/Ultrathins.ttf");
+}
+
+body {
+  color: #7c868c;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
