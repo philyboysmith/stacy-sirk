@@ -117,11 +117,11 @@ const IndexPage = () => (
 
     <div className=" relative w-full text-2xl ">
       <nav className="fixed top-0 bg-white py-4 z-50 bg-black w-full left-0">
-        <ul class="uppercase flex ss-container -mx-2">
+        <ul class="uppercase flex ss-container -mx-2 lg:mx-auto">
           {pages.map(p => (
             <li>
               <button
-                className="appearance-none p-2 text-white"
+                className="appearance-none py-2 pl-0 pr-4 text-white"
                 onClick={() => scrollTo("#" + p.title)}
               >
                 {p.title}
@@ -137,9 +137,11 @@ const IndexPage = () => (
           width={1831}
           height={1438}
           layout="fixed"
-          className="fixed top-0 left-0 w-full h-screen"
+          className="w-full h-screen"
           style={{
             maxHeight: "100vh",
+            width: "100%",
+            position: "fixed",
           }}
         />
         <div className="ss-container flex flex-col lg:flex-row gap-4 relative z-10 h-screen items-center justify-center ">
