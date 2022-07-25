@@ -22,11 +22,13 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <div className="mx-auto max-w-5xl px-8 lg:px-16 font-univers py-4">
+      <div className="font-univers">
         <main>{children}</main>
-        <footer className="py-4">
-          © {new Date().getFullYear()} &middot; Stacy Sirk
-        </footer>
+        <div className="bg-white relative z-20">
+          <footer className="ss-container py-4">
+            © {new Date().getFullYear()} &middot; Stacy Sirk
+          </footer>
+        </div>
       </div>
     </>
   )

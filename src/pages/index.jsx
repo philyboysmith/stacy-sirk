@@ -18,6 +18,7 @@ const pages = [
   {
     title: "source",
     c: <Source className="lg:h-[230px] lg:w-auto" />,
+    color: "#2f2f2f",
     image: (
       <StaticImage
         alt="source"
@@ -40,6 +41,7 @@ const pages = [
   {
     title: "style",
     c: <Style className="lg:h-[230px] lg:w-auto" />,
+    color: "#ddded8",
     image: (
       <StaticImage
         alt="style"
@@ -57,6 +59,7 @@ const pages = [
   {
     title: "sprout",
     c: <Sprout className="lg:h-[230px] lg:w-auto" />,
+    color: "#b2318b",
     image: (
       <StaticImage
         alt="sprout"
@@ -74,6 +77,7 @@ const pages = [
   {
     title: "scene",
     c: <Scene className="lg:h-[230px] lg:w-auto" />,
+    color: "#c55a12",
     image: (
       <StaticImage
         alt="scene"
@@ -91,6 +95,7 @@ const pages = [
   {
     title: "self",
     c: <Self className="lg:h-[230px] lg:w-auto" />,
+    color: "#aa926e",
     image: (
       <StaticImage
         alt="self"
@@ -111,12 +116,12 @@ const IndexPage = () => (
     <Seo title="Home" />
 
     <div className=" relative w-full text-2xl ">
-      <nav className=" -mx-2 sticky top-0 bg-white py-4 z-20">
-        <ul class="uppercase flex ">
+      <nav className="fixed top-0 bg-white py-4 z-50 bg-black w-full left-0">
+        <ul class="uppercase flex ss-container -mx-2">
           {pages.map(p => (
             <li>
               <button
-                className="appearance-none p-2"
+                className="appearance-none p-2 text-white"
                 onClick={() => scrollTo("#" + p.title)}
               >
                 {p.title}
@@ -125,42 +130,56 @@ const IndexPage = () => (
           ))}
         </ul>
       </nav>
-
-      <Logo className="w-[110px] h-auto mt-6" />
-
-      <div className="lg:flex gap-4 relative z-10 mt-28 border-b-[10px] border-[#7c868c] border-opacity-20 pb-32">
-        <div className="lg:w-[390px]">
-          <S className="w-full h-auto" />
-        </div>
-        <div className="flex-1">
-          <Smile className="lg:h-[262px] lg:-mt-2" />
+      <div>
+        <StaticImage
+          alt="scene"
+          src="../images/home.jpg"
+          width={1831}
+          height={1438}
+          layout="fixed"
+          className="fixed top-0 left-0 w-full h-screen"
+          style={{
+            maxHeight: "100vh",
+          }}
+        />
+        <div className="ss-container flex flex-col lg:flex-row gap-4 relative z-10 h-screen items-center justify-center ">
+          <div className="lg:w-[390px]">
+            <S className="w-full h-auto" fill="rgba(255,255,255,0.8)" />
+          </div>
+          <div className="lg:flex-1">
+            <Smile className="w-full lg:w-auto lg:h-[262px] lg:-mt-2" />
+          </div>
         </div>
       </div>
 
-      {pages.map(p => (
-        <>
-          <div
-            id={p.title}
-            className="lg:flex lg:flex-wrap gap-4 relative z-10 pt-16 border-b-[10px] border-[#7c868c] border-opacity-20 pt-32 pb-48"
-          >
-            <div className="lg:w-[390px]">
-              <S className="w-full h-auto" />
+      <div className="bg-white relative z-20">
+        {pages.map(p => (
+          <>
+            <div
+              id={p.title}
+              className="ss-container flex flex-col lg:flex-row lg:flex-wrap gap-4 relative z-10 pt-16 border-b-[10px] border-[#7c868c] border-opacity-20 pt-32 pb-48"
+            >
+              <div className="lg:w-[390px]">
+                <S className="w-full h-auto" fill={p.color} />
+              </div>
+              <div className="lg:flex-1">{p.c}</div>
+              <div className="lg:w-[390px] pt-4">{p.image}</div>
+              <div className="flex-1 text-left pt-4">
+                {p.body.list.length > 0 ? (
+                  <ul className="border-t mb-12">
+                    {p.body.list.map(l => (
+                      <li className="uppercase py-[0.15rem] border-b">{l}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <Logo className="w-32 h-auto" />
+                )}
+                <div dangerouslySetInnerHTML={{ __html: p.body.content }} />
+              </div>
             </div>
-            <div className="flex-1">{p.c}</div>
-            <div className="lg:w-[390px] pt-4">{p.image}</div>
-            <div className="flex-1 text-left pt-4">
-              {p.body.list.length > 0 && (
-                <ul className="border-t mb-12">
-                  {p.body.list.map(l => (
-                    <li className="uppercase py-[0.15rem] border-b">{l}</li>
-                  ))}
-                </ul>
-              )}
-              <div dangerouslySetInnerHTML={{ __html: p.body.content }} />
-            </div>
-          </div>
-        </>
-      ))}
+          </>
+        ))}
+      </div>
     </div>
   </Layout>
 )
