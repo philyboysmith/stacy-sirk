@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
-
+import axios from "axios"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import S from "../components/s"
@@ -13,6 +13,8 @@ import Scene from "../components/Scene"
 import Self from "../components/Self"
 import Style from "../components/Style"
 import scrollTo from "gatsby-plugin-smoothscroll"
+import { XCircleIcon } from "@heroicons/react/solid"
+import { CheckCircleIcon } from "@heroicons/react/solid"
 
 const pages = [
   {
@@ -111,79 +113,177 @@ const pages = [
   },
 ]
 
-const IndexPage = () => (
-  <Layout>
-    <Seo title="Home" />
+const IndexPage = () => {
+  const [serverState, setServerState] = React.useState({
+    submitting: false,
+    status: null,
+  })
+  const handleServerResponse = (ok, msg, form) => {
+    setServerState({
+      submitting: false,
+      status: { ok, msg },
+    })
+    if (ok) {
+      form.reset()
+    }
+  }
+  const handleOnSubmit = e => {
+    e.preventDefault()
+    const form = e.target
+    setServerState({ submitting: true })
+    axios({
+      method: "post",
+      url: process.env.FORM_URL,
+      data: new FormData(form),
+    })
+      .then(r => {
+        handleServerResponse(true, "Thanks!", form)
+      })
+      .catch(r => {
+        console.log(r)
+        handleServerResponse(false, r.response.data.error, form)
+      })
+  }
 
-    <div className=" relative w-full text-2xl ">
-      <nav className="fixed top-0 bg-white py-4 z-50 bg-black w-full left-0">
-        <ul class="uppercase flex ss-container -mx-2 lg:mx-auto">
-          {pages.map(p => (
-            <li>
-              <button
-                className="appearance-none py-2 pl-0 pr-4 text-white"
-                onClick={() => scrollTo("#" + p.title)}
-              >
-                {p.title}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <div>
-        <StaticImage
-          alt="scene"
-          src="../images/home.jpg"
-          width={1831}
-          height={1438}
-          layout="fixed"
-          className="w-full h-screen"
-          style={{
-            maxHeight: "100vh",
-            width: "100%",
-            position: "fixed",
-          }}
-        />
-        <div className="ss-container flex flex-col lg:flex-row gap-4 relative z-10 h-screen items-center justify-center ">
-          <div className="lg:w-[390px]">
-            <S className="w-full h-auto" fill="rgba(255,255,255,0.8)" />
-          </div>
-          <div className="lg:flex-1">
-            <Smile className="w-full lg:w-auto lg:h-[262px] lg:-mt-2" />
+  return (
+    <Layout>
+      <Seo title="Home" />
+
+      <div className=" relative w-full text-2xl ">
+        <nav className="fixed top-0 bg-white py-4 z-50 bg-black w-full left-0">
+          <ul className="uppercase flex ss-container -mx-2 lg:mx-auto">
+            {pages.map(p => (
+              <li>
+                <button
+                  className="appearance-none py-2 pl-0 pr-4 text-white"
+                  onClick={() => scrollTo("#" + p.title)}
+                >
+                  {p.title}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div>
+          <StaticImage
+            alt="scene"
+            src="../images/home.jpg"
+            width={1831}
+            height={1438}
+            layout="fixed"
+            className="w-full h-screen"
+            style={{
+              maxHeight: "100vh",
+              width: "100%",
+              position: "fixed",
+            }}
+          />
+          <div className="ss-container flex flex-col lg:flex-row gap-4 relative z-10 h-screen items-center justify-center ">
+            <div className="lg:w-[390px]">
+              <S className="w-full h-auto" fill="rgba(255,255,255,0.8)" />
+            </div>
+            <div className="lg:flex-1">
+              <Smile className="w-full lg:w-auto lg:h-[262px] lg:-mt-2" />
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="bg-white relative z-20">
-        {pages.map(p => (
-          <>
-            <div
-              id={p.title}
-              className="ss-container flex flex-col lg:flex-row lg:flex-wrap gap-4 relative z-10 pt-16 border-b-[10px] border-[#7c868c] border-opacity-20 pt-32 pb-48"
-            >
-              <div className="lg:w-[390px]">
-                <S className="w-full h-auto" fill={p.color} />
+        <div className="bg-white relative z-20">
+          {pages.map(p => (
+            <>
+              <div
+                id={p.title}
+                className="ss-container flex flex-col lg:flex-row lg:flex-wrap gap-4 relative z-10 pt-16 border-b-[10px] border-[#7c868c] border-opacity-20 pt-32 pb-48"
+              >
+                <div className="lg:w-[390px]">
+                  <S className="w-full h-auto" fill={p.color} />
+                </div>
+                <div className="lg:flex-1">{p.c}</div>
+                <div className="lg:w-[390px] pt-4">{p.image}</div>
+                <div className="flex-1 text-left pt-4">
+                  {p.body.list.length > 0 ? (
+                    <ul className="border-t mb-12">
+                      {p.body.list.map(l => (
+                        <li className="uppercase py-[0.15rem] border-b">{l}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <div>
+                      <Logo className="w-32 h-auto" />
+                      {serverState.status?.ok && (
+                        <div className="text-2xl  my-6 rounded-md bg-green-50 p-4">
+                          <div className="flex items-center">
+                            <div className="flex-shrink-0">
+                              <CheckCircleIcon
+                                className="h-5 w-5 text-green-400"
+                                aria-hidden="true"
+                              />
+                            </div>
+                            <div className="ml-3">
+                              <h3 className="text-2xl font-medium text-green-800">
+                                Message received
+                              </h3>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                      {serverState.status?.ok === false && (
+                        <div className="text-2xl my-6 rounded-md bg-red-50 p-4">
+                          <div className="flex items-center">
+                            <div className="flex-shrink-0">
+                              <XCircleIcon
+                                className="h-5 w-5 text-red-400"
+                                aria-hidden="true"
+                              />
+                            </div>
+                            <div className="ml-3">
+                              <h3 className="text-2xl font-medium text-red-800">
+                                There was a problem with your submission
+                              </h3>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                      {serverState.status === null && (
+                        <form onSubmit={handleOnSubmit}>
+                          <input
+                            className="border p-2 rounded my-2 block w-full"
+                            type="email"
+                            name="email"
+                            placeholder="Your Email"
+                          />
+                          <input
+                            className="border p-2 rounded my-2 block w-full"
+                            type="text"
+                            name="name"
+                            placeholder="Your Name"
+                          />
+                          <textarea
+                            className="border p-2 rounded my-2 block w-full"
+                            type="text"
+                            name="message"
+                            placeholder="Your Message"
+                            rows="5"
+                          ></textarea>
+                          <button
+                            className="bg-[#aa926e] text-white uppercase py-4 px-8 appearance-none"
+                            type="submit"
+                          >
+                            Send
+                          </button>
+                        </form>
+                      )}
+                    </div>
+                  )}
+                  <div dangerouslySetInnerHTML={{ __html: p.body.content }} />
+                </div>
               </div>
-              <div className="lg:flex-1">{p.c}</div>
-              <div className="lg:w-[390px] pt-4">{p.image}</div>
-              <div className="flex-1 text-left pt-4">
-                {p.body.list.length > 0 ? (
-                  <ul className="border-t mb-12">
-                    {p.body.list.map(l => (
-                      <li className="uppercase py-[0.15rem] border-b">{l}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <Logo className="w-32 h-auto" />
-                )}
-                <div dangerouslySetInnerHTML={{ __html: p.body.content }} />
-              </div>
-            </div>
-          </>
-        ))}
+            </>
+          ))}
+        </div>
       </div>
-    </div>
-  </Layout>
-)
+    </Layout>
+  )
+}
 
 export default IndexPage
