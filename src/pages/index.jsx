@@ -150,7 +150,7 @@ const IndexPage = () => {
       <Seo title="Home" />
 
       <div className=" relative w-full text-2xl ">
-        <nav className="fixed top-0 bg-white py-4 z-50 bg-black w-full left-0">
+        <nav className="md:fixed sticky top-0 bg-white py-4 z-50 bg-black w-full left-0">
           <ul className="uppercase flex ss-container -mx-2 lg:mx-auto">
             {pages.map(p => (
               <li>
@@ -164,26 +164,28 @@ const IndexPage = () => {
             ))}
           </ul>
         </nav>
-        <div>
+        <div className="h-[100vw] relative max-h-screen bg-black">
           <StaticImage
             alt="scene"
             src="../images/home.jpg"
-            width={1831}
-            height={1438}
-            layout="fixed"
-            className="w-full h-screen"
+            width={1920}
+            height={1969}
+            className="w-full h-full opacity-90"
             style={{
-              maxHeight: "100vh",
+              height: "100%",
               width: "100%",
-              position: "fixed",
+              position: "absolute",
+              // objectFit: "contain",
             }}
           />
-          <div className="ss-container flex flex-col lg:flex-row gap-4 relative z-10 h-screen items-center justify-center ">
-            <div className="lg:w-[390px]">
-              <S className="w-full h-auto" fill="rgba(255,255,255,0.8)" />
-            </div>
-            <div className="lg:flex-1">
-              <Smile className="w-full lg:w-auto lg:h-[262px] lg:-mt-2" />
+          <div className="absolute inset-0">
+            <div className="ss-container flex flex-col lg:flex-row gap-4 relative z-10 h-full items-center justify-center ">
+              <div className="lg:w-[390px]">
+                <S className="w-full h-auto" fill="rgba(255,255,255,0.8)" />
+              </div>
+              <div className="lg:flex-1">
+                <Smile className="w-full lg:w-auto lg:h-[265px] lg:mt-2" />
+              </div>
             </div>
           </div>
         </div>
