@@ -133,7 +133,7 @@ const IndexPage = () => {
     setServerState({ submitting: true })
     axios({
       method: "post",
-      url: process.env.FORM_URL,
+      url: "https://getform.io/f/13033f8e-8974-4a18-9123-a2a5a2c85c11",
       data: new FormData(form),
     })
       .then(r => {
@@ -170,7 +170,7 @@ const IndexPage = () => {
             src="../images/home.jpg"
             width={1920}
             height={1969}
-            className="w-full h-full opacity-90"
+            className="w-full h-full opacity-50"
             style={{
               height: "100%",
               width: "100%",
