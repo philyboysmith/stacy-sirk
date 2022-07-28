@@ -170,11 +170,10 @@ const IndexPage = () => {
             src="../images/home.jpg"
             width={1920}
             height={1969}
-            className="w-full h-full opacity-50"
+            className="w-full h-full md:fixed"
             style={{
               height: "100%",
               width: "100%",
-              position: "absolute",
               // objectFit: "contain",
             }}
           />
