@@ -24,7 +24,7 @@ const pages = [
     image: (
       <StaticImage
         alt="source"
-        src="../images/source.jpg"
+        src="../images/source-1.jpg"
         width={640}
         height={996}
       />
@@ -47,7 +47,7 @@ const pages = [
     image: (
       <StaticImage
         alt="style"
-        src="../images/style.jpg"
+        src="../images/style-1.jpg"
         width={640}
         height={996}
       />
@@ -55,7 +55,7 @@ const pages = [
     body: {
       list: ["EDITOR AT LARGE", "STYLIST", "CREATIVE LEAD", "AUTHOR"],
       content:
-        "<p>I love capturing stories that shine a light on quirky lifestyles, sustainable skills, and intriguing perspectives for magazines, books, print and digital</p><p>GARTENLUST, WORKMAN, GUARDIAN WEEKEND, GREEN PROFIT, FLEA MARKET STYLE, CICO, ARTISAN, WOMEN CREATE</p>",
+        "<p>I love capturing stories that shine a light on quirky lifestyles, sustainable skills, and intriguing perspectives for magazines, books, print and digital</p><p>GARTENLUST, WORKMAN, GUARDIAN WEEKEND, GREEN PROFIT, FLEA MARKET STYLE, CICO, ARTISAN, WOMEN CREATE, JEANNE D’ARC LIVING, MADETV</p>",
     },
   },
   {
@@ -65,7 +65,7 @@ const pages = [
     image: (
       <StaticImage
         alt="sprout"
-        src="../images/sprout.jpg"
+        src="../images/sprout-1.jpg"
         width={640}
         height={996}
       />
@@ -83,7 +83,7 @@ const pages = [
     image: (
       <StaticImage
         alt="scene"
-        src="../images/scene.jpg"
+        src="../images/scene-1.jpg"
         width={640}
         height={996}
       />
