@@ -101,7 +101,7 @@ const pages = [
     image: (
       <StaticImage
         alt="self"
-        src="../images/self.jpg"
+        src="../images/self-1.jpg"
         width={640}
         height={996}
       />
